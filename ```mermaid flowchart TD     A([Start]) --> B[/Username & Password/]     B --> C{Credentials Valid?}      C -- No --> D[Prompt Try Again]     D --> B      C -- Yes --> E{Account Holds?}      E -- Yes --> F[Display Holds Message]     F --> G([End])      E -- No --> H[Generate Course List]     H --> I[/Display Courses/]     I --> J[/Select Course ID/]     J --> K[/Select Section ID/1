@@ -2,40 +2,45 @@
 flowchart TD
 
 subgraph Legend
-A1([Start/End - Oval])
-A2[Process - Rectangle]
-A3[/Input/Output - Parallelogram/]
-A4{Decision - Diamond}
+L1([Start/End - Oval])
+L2[Process - Rectangle]
+L3[/Input or Output - Parallelogram/]
+L4{Decision - Diamond}
 end
 
-S([Start])
-S --> U[/Input Username & Password/]
-U --> V{Credentials Valid?}
+A([Start]) --> B[/Input Username & Password/]
 
-V -- No --> W[/Prompt Student To Try Again/]
-W --> U
+B --> C{Credentials Valid?}
 
-V -- Yes --> X{Account Holds?}
+C -- No --> D[/Prompt Student To Try Again/]
+D --> B
 
-X -- Yes --> Y[/Display Holds Message/]
-Y --> Z([End])
+C -- Yes --> E{Account Holds?}
 
-X -- No --> AA[Generate Course List]
-AA --> AB[/Display Courses/]
-AB --> AC[/Select Course ID/]
-AC --> AD[/Select Section ID/]
+E -- Yes --> F[/Display Holds Must Be Resolved Message/]
+F --> G([End])
 
-AD --> AE{Prerequisites Met?}
+E -- No --> H[Generate Course List]
 
-AE -- No --> AF[/Display Prerequisite Message/]
-AF --> AB
+H --> I[/Display Courses/]
 
-AE -- Yes --> AG{Open Seats > 0?}
+I --> J[/Select Course ID/]
 
-AG -- No --> AH[/Display Section Full Message/]
-AH --> AB
+J --> K[/Select Section ID/]
 
-AG -- Yes --> AI[Enroll In Course]
-AI --> AJ[/Confirm Enrollment/]
-AJ --> Z
+K --> L{Prerequisites Met?}
+
+L -- No --> M[/Display Prerequisite Not Met Message/]
+M --> I
+
+L -- Yes --> N{Open Seats > 0?}
+
+N -- No --> O[/Display Section Full Message/]
+O --> I
+
+N -- Yes --> P[Enroll In Course]
+
+P --> Q[/Confirm Enrollment/]
+
+Q --> G
 ```
