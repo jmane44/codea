@@ -1,32 +1,67 @@
 ```mermaid
 flowchart TD
-    A([Start]) --> B[/Username & Password/]
-    B --> C{Credentials Valid?}
 
-    C -- No --> D[Prompt Try Again]
-    D --> B
+A([Start])
 
-    C -- Yes --> E{Account Holds?}
+B[/Input Username & Password/]
 
-    E -- Yes --> F[Display Holds Message]
-    F --> G([End])
+C{Credentials Valid?}
 
-    E -- No --> H[Generate Course List]
-    H --> I[/Display Courses/]
-    I --> J[/Select Course ID/]
-    J --> K[/Select Section ID/]
+D[/Prompt Student To Try Again/]
 
-    K --> L{Prerequisites Met?}
+E{Account Holds?}
 
-    L -- No --> M[Display Prerequisite Message]
-    M --> I
+F[/Display Holds Must Be Resolved Message/]
 
-    L -- Yes --> N{Open Seats > 0?}
+G([End])
 
-    N -- No --> O[Display Section Full Message]
-    O --> I
+H[Generate Course List]
 
-    N -- Yes --> P[Enroll in Course]
-    P --> Q[Confirm Enrollment]
-    Q --> G
+I[/Display Courses/]
+
+J[/Select Course ID/]
+
+K[/Select Section ID/]
+
+L{Prerequisites Met?}
+
+M[/Display Prerequisite Not Met Message/]
+
+N{Open Seats > 0?}
+
+O[/Display Section Full Message/]
+
+P[Enroll In Course]
+
+Q[/Confirm Enrollment/]
+
+A --> B
+B --> C
+
+C -- No --> D
+D --> B
+
+C -- Yes --> E
+
+E -- Yes --> F
+F --> G
+
+E -- No --> H
+H --> I
+I --> J
+J --> K
+
+K --> L
+
+L -- No --> M
+M --> I
+
+L -- Yes --> N
+
+N -- No --> O
+O --> I
+
+N -- Yes --> P
+P --> Q
+Q --> G
 ```
