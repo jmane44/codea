@@ -2,40 +2,85 @@
 flowchart TD
 
 subgraph Legend
-A1([Start/End - Oval])
-A2[Process - Rectangle]
-A3[/Input/Output - Parallelogram/]
-A4{Decision - Diamond}
+L1([Start/End - Oval])
+L2[Process - Rectangle]
+L3[/Input or Output - Parallelogram/]
+L4{Decision - Diamond}
 end
 
-S([Start])
-S --> U[/Input Username & Password/]
-U --> V{Credentials Valid?}
+A([Start]) --> B[Reflect on Interests and Strengths]
 
-V -- No --> W[/Prompt Student To Try Again/]
-W --> U
+B --> C[/Input Selected Major/]
 
-V -- Yes --> X{Account Holds?}
+C --> D[Set potential = 0]
 
-X -- Yes --> Y[/Display Holds Message/]
-Y --> Z([End])
+D --> E{Passionate About This Major?}
 
-X -- No --> AA[Generate Course List]
-AA --> AB[/Display Courses/]
-AB --> AC[/Select Course ID/]
-AC --> AD[/Select Section ID/]
+E -- No --> C
 
-AD --> AE{Prerequisites Met?}
+E -- Yes --> F[potential += 1]
 
-AE -- No --> AF[/Display Prerequisite Message/]
-AF --> AB
+F --> G{Good At This Kind of Work?}
 
-AE -- Yes --> AG{Open Seats > 0?}
+G -- Yes --> H[potential += 1]
 
-AG -- No --> AH[/Display Section Full Message/]
-AH --> AB
+G -- No --> I[Research Job Prospects]
 
-AG -- Yes --> AI[Enroll In Course]
-AI --> AJ[/Confirm Enrollment/]
-AJ --> Z
+H --> I
+
+I --> J{Confident You Can Get a Job?}
+
+J -- Yes --> K[potential += 1]
+
+J -- No --> L[potential -= 1]
+
+K --> M[Research Compensation]
+
+L --> M
+
+M --> N{Can Stop Living Like a Student?}
+
+N -- Yes --> O[potential += 1]
+
+N -- No --> P[potential -= 1]
+
+O --> Q[Reflect on Life Goals]
+
+P --> Q
+
+Q --> R{Will This Major Support Your Life Goals?}
+
+R -- No --> C
+
+R -- Yes --> S[potential += 1]
+
+S --> T{potential >= 4?}
+
+T -- No --> C
+
+T -- Yes --> U[majorList += thisMajor]
+
+U --> V{Consider Another Major?}
+
+V -- Yes --> C
+
+V -- No --> W[Assess Admission Requirements]
+
+W --> X{Meet Requirements?}
+
+X -- Yes --> Y[Keep Major on List]
+
+X -- No --> Z{Can Meet Requirements Before Deadline?}
+
+Z -- Yes --> Y
+
+Z -- No --> AA[Remove Major From List]
+
+Y --> AB{More Majors On List?}
+
+AA --> AB
+
+AB -- Yes --> W
+
+AB -- No --> AC([End])
 ```
