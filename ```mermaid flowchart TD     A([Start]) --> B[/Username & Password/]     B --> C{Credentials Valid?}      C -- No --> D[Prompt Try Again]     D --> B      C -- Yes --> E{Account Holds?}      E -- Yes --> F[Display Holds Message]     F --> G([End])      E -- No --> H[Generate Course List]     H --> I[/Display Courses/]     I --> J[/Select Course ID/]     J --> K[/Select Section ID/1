@@ -1,41 +1,67 @@
 ```mermaid
 flowchart TD
 
-subgraph Legend
-A1([Start/End - Oval])
-A2[Process - Rectangle]
-A3[/Input/Output - Parallelogram/]
-A4{Decision - Diamond}
-end
+A([Start])
 
-S([Start])
-S --> U[/Input Username & Password/]
-U --> V{Credentials Valid?}
+B[/Input Username & Password/]
 
-V -- No --> W[/Prompt Student To Try Again/]
-W --> U
+C{Credentials Valid?}
 
-V -- Yes --> X{Account Holds?}
+D[/Prompt Student To Try Again/]
 
-X -- Yes --> Y[/Display Holds Message/]
-Y --> Z([End])
+E{Account Holds?}
 
-X -- No --> AA[Generate Course List]
-AA --> AB[/Display Courses/]
-AB --> AC[/Select Course ID/]
-AC --> AD[/Select Section ID/]
+F[/Display Holds Must Be Resolved Message/]
 
-AD --> AE{Prerequisites Met?}
+G([End])
 
-AE -- No --> AF[/Display Prerequisite Message/]
-AF --> AB
+H[Generate Course List]
 
-AE -- Yes --> AG{Open Seats > 0?}
+I[/Display Courses/]
 
-AG -- No --> AH[/Display Section Full Message/]
-AH --> AB
+J[/Select Course ID/]
 
-AG -- Yes --> AI[Enroll In Course]
-AI --> AJ[/Confirm Enrollment/]
-AJ --> Z
+K[/Select Section ID/]
+
+L{Prerequisites Met?}
+
+M[/Display Prerequisite Not Met Message/]
+
+N{Open Seats > 0?}
+
+O[/Display Section Full Message/]
+
+P[Enroll In Course]
+
+Q[/Confirm Enrollment/]
+
+A --> B
+B --> C
+
+C -- No --> D
+D --> B
+
+C -- Yes --> E
+
+E -- Yes --> F
+F --> G
+
+E -- No --> H
+H --> I
+I --> J
+J --> K
+
+K --> L
+
+L -- No --> M
+M --> I
+
+L -- Yes --> N
+
+N -- No --> O
+O --> I
+
+N -- Yes --> P
+P --> Q
+Q --> G
 ```
